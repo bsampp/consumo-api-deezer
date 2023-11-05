@@ -11,6 +11,22 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'songs',
+    loadChildren: () => import('./view/songs/songs.module').then( m => m.SongsPageModule)
+  },
+  {
+    path: 'song-details',
+    loadChildren: () => import('./view/song-details/song-details.module').then( m => m.SongDetailsPageModule)
+  },
+  {
+    path: 'tracks',
+    loadChildren: () => import('./view/tracks/tracks.module').then( m => m.TracksPageModule)
+  },
+  {
+    path: 'track-details',
+    loadChildren: () => import('./view/track-details/track-details.module').then( m => m.TrackDetailsPageModule)
+  },
 ];
 
 @NgModule({
