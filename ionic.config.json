@@ -1,0 +1,7 @@
+{
+  "name": "consumo-api-deezer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
