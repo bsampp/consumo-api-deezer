@@ -1,24 +1,21 @@
-<ion-header >
-  <ion-toolbar color = "dark">
-    <ion-title>tracks finder</ion-title>
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Tracks Finder</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-
-  
-  <ion-searchbar></ion-searchbar>
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTrack" (ionChange)="search()"></ion-searchbar>
 
   <ion-list>
-    <ion-item>
-      <!--cada item encontrado usando a api -->
-      <ion-avatar>
-        <!--provavelmente uma img -->
+    <ion-item *ngFor="let track of tracks">
+      <ion-avatar slot="start">
+        <ion-img [src]="track.album.cover_medium"></ion-img>
       </ion-avatar>
-      <ion-label text-wrap>
-
+      <ion-label>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist.name }}</p>
       </ion-label>
     </ion-item>
-  <ion-list/>
-
+  </ion-list>
 </ion-content>
