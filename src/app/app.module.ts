@@ -1,19 +1,30 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DeezerapiService } from 'src/app/model/services/deezerapi.service';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-
-import { HttpClientModule } from '@angular/common/http';
-
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+@Component({
+  selector: 'app-track-details',
+  templateUrl: './track-details.page.html',
+  styleUrls: ['./track-details.page.scss'],
 })
-export class AppModule {}
+export class TrackDetailsPage implements OnInit {
+
+  info: any;
+
+  constructor(private actRoute : ActivatedRoute, private deezerApi: DeezerapiService) { }
+
+  ngOnInit() {
+    let id  = this.actRoute.snapshot.paramMap.get('id');
+    this.deezerApi.getTrackDetails(id).subscribe(result => {
+      this.info=result
+      this.info.durationInMinutes = this.convertSecondsToMinutes(this.info.duration);
+    });
+  }
+
+  convertSecondsToMinutes(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }
+
+}
