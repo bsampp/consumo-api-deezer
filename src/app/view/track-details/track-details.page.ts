@@ -15,7 +15,16 @@ export class TrackDetailsPage implements OnInit {
 
   ngOnInit() {
     let id  = this.actRoute.snapshot.paramMap.get('id');
-    this.deezerApi.getTrackDetails(id).subscribe(result => {this.info=result});
+    this.deezerApi.getTrackDetails(id).subscribe(result => {
+      this.info=result
+      this.info.durationInMinutes = this.convertSecondsToMinutes(this.info.duration);
+    });
+  }
+
+  convertSecondsToMinutes(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
 
 }
