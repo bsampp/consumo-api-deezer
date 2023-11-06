@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { DeezerapiService } from 'src/app/model/services/deezerapi.service';
 
 @Component({
@@ -7,18 +8,19 @@ import { DeezerapiService } from 'src/app/model/services/deezerapi.service';
   styleUrls: ['./tracks.page.scss'],
 })
 export class TracksPage implements OnInit {
-  tracks: any[] = [];
   searchTrack: string = '';
+  tracks$!: Observable<any>;
 
   constructor(private deezerApi: DeezerapiService) {}
 
   ngOnInit() {}
 
   search() {
-    this.deezerApi.getAllTracks(this.searchTrack).subscribe((response: any) => {
-      this.tracks = response.data; // Use a estrutura real da resposta
-    }, (error: any) => {
-      console.error(error);
-    });
+    this.tracks$ = this.deezerApi.getAllTracks(this.searchTrack).pipe(
+      map((response: any) => {
+        return response.data; // Use a estrutura real da resposta
+      })
+    );
   }
 }
+

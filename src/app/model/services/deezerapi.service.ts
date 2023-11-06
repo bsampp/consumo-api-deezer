@@ -25,7 +25,7 @@ export class DeezerapiService {
   }
 
   // Método para obter os detalhes de uma faixa por ID
-  getTrackDetails(trackId: string): Observable<any> {
+  getTrackDetails(trackId: any): Observable<any> {
     const options = {
       headers: this.headers
     };
