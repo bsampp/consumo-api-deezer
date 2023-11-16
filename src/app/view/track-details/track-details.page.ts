@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeezerapiService } from 'src/app/model/services/deezerapi.service';
 
@@ -10,6 +10,7 @@ import { DeezerapiService } from 'src/app/model/services/deezerapi.service';
 export class TrackDetailsPage implements OnInit {
 
   info: any;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
   constructor(private actRoute : ActivatedRoute, private deezerApi: DeezerapiService) { }
 
@@ -25,6 +26,15 @@ export class TrackDetailsPage implements OnInit {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }
+
+  playPreview() {
+    const audioElement: HTMLAudioElement = this.audioPlayer.nativeElement;
+    if (this.info && this.info.preview) {
+      audioElement.src = this.info.preview;
+
+      audioElement.play();
+    }
   }
 
 }
