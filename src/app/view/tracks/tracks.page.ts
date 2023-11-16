@@ -18,7 +18,7 @@ export class TracksPage implements OnInit {
   search() {
     this.tracks$ = this.deezerApi.getAllTracks(this.searchTrack).pipe(
       map((response: any) => {
-        return response.data; // Use a estrutura real da resposta
+        return response.data;
       })
     );
   }

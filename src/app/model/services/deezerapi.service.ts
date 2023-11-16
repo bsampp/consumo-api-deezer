@@ -14,17 +14,15 @@ export class DeezerapiService {
 
   constructor(private http: HttpClient) {}
 
-  // Método para buscar todas as faixas
   getAllTracks(name: string): Observable<any> {
     const options = {
       headers: this.headers,
-      params: new HttpParams().set('q', name) // Adicione os parâmetros da consulta aqui
+      params: new HttpParams().set('q', name)
     };
 
     return this.http.get(`${this.baseUrl}search`, options);
   }
 
-  // Método para obter os detalhes de uma faixa por ID
   getTrackDetails(trackId: any): Observable<any> {
     const options = {
       headers: this.headers
