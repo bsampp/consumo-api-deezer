@@ -16,11 +16,15 @@ export class TracksPage implements OnInit {
   ngOnInit() {}
 
   search() {
-    this.tracks$ = this.deezerApi.getAllTracks(this.searchTrack).pipe(
-      map((response: any) => {
-        return response.data;
-      })
-    );
+    try{
+      this.tracks$ = this.deezerApi.getAllTracks(this.searchTrack).pipe(
+        map((response: any) => {
+          return response.data;
+        })
+      );    
+    }catch(error){
+      console.log(error)
+    }
   }
 }
 

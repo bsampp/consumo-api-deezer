@@ -22,11 +22,10 @@
     
     <img [src]="info?.album.cover_xl" id="img"/>
     <ion-item lines="none">
-      <ion-label>{{info?.release_date}}</ion-label>
+      <ion-label text-wrap>Release Date: {{info?.release_date}}</ion-label>
     </ion-item>
-
     <ion-item lines="none">
-      <ion-label text-wrap>{{info?.durationInMinutes}}</ion-label>
+      <ion-label text-wrap>Duration: {{info?.durationInMinutes}}</ion-label>
     </ion-item>
 
     <audio *ngIf="info?.preview" [src]="info?.preview" controls #audioPlayer></audio>
